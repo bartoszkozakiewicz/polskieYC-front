@@ -8,22 +8,21 @@ export default function SignupWithPassword() {
   const router = useRouter();
 
   const [data, setData] = useState({
-    name:"",
+    name: "",
     email: "",
     password: "",
     remember: false,
   });
 
-
   // ---- firebase auth ----
   const handleSignUp = async () => {
-    console.log("start signing up")
+    console.log("start signing up");
     signUpWithEmail(data.email, data.password, data.name);
-  }
+  };
 
   useEffect(() => {
     if (user) {
-      router.push("/");
+      router.push("/profile_form");
     }
   }, [user]);
 
@@ -40,7 +39,9 @@ export default function SignupWithPassword() {
         </label>
         <div className="relative">
           <input
-            onChange={(e) =>setData({...data, [e.target.name]: e.target.value})}
+            onChange={(e) =>
+              setData({ ...data, [e.target.name]: e.target.value })
+            }
             value={data.name}
             type="name"
             placeholder="Enter your full name"
@@ -77,7 +78,9 @@ export default function SignupWithPassword() {
         </label>
         <div className="relative">
           <input
-            onChange={(e) =>setData({...data, [e.target.name]: e.target.value})}
+            onChange={(e) =>
+              setData({ ...data, [e.target.name]: e.target.value })
+            }
             value={data.email}
             type="email"
             placeholder="Enter your email"
@@ -114,7 +117,9 @@ export default function SignupWithPassword() {
         </label>
         <div className="relative">
           <input
-            onChange={(e) =>setData({...data, [e.target.name]: e.target.value})}
+            onChange={(e) =>
+              setData({ ...data, [e.target.name]: e.target.value })
+            }
             value={data.password}
             type="password"
             name="password"
@@ -182,7 +187,6 @@ export default function SignupWithPassword() {
           </span>
           Remember me
         </label>
-
       </div>
 
       <div className="mb-4.5">

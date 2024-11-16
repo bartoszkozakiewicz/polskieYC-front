@@ -13,8 +13,7 @@ export const metadata: Metadata = {
 
 const SignIn: React.FC = () => {
   return (
-
-    <div className="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10 max-h-[95vh]">
+    <div className="mx-auto max-h-[95vh] max-w-screen-2xl p-4 md:p-6 2xl:p-10">
       <div className="rounded-[10px] bg-white shadow-1 dark:bg-gray-dark dark:shadow-card">
         <div className="flex flex-wrap items-center">
           <div className="w-full xl:w-1/2">
@@ -25,7 +24,7 @@ const SignIn: React.FC = () => {
 
           <div className="hidden w-full p-7.5 xl:block xl:w-1/2">
             <div className="custom-gradient-1 overflow-hidden rounded-2xl px-12.5 pt-12.5 dark:!bg-dark-2 dark:bg-none">
-              <p className="mb-10 text-2xl font-bold">TranscriptManager</p>
+              <p className="mb-10 text-2xl font-bold">PolishYC</p>
               <p className="mb-3 text-xl font-medium text-dark dark:text-white">
                 Sign in to your account
               </p>
@@ -47,12 +46,11 @@ const SignIn: React.FC = () => {
                   className="mx-auto dark:opacity-30"
                 />
               </div>
-
             </div>
           </div>
         </div>
       </div>
-      </div>
+    </div>
   );
 };
 

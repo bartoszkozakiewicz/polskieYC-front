@@ -60,7 +60,7 @@ const DropdownUser = () => {
               </span>
             </span>
           </div>
-          <ul className="flex flex-col gap-1 border-y-[0.5px] border-stroke p-2.5 dark:border-dark-3">
+          {/* <ul className="flex flex-col gap-1 border-y-[0.5px] border-stroke p-2.5 dark:border-dark-3">
             <li>
               <Link
                 href="/billing"
@@ -70,7 +70,7 @@ const DropdownUser = () => {
                 <p>{typeof credits === "number" ? credits : "..."}</p>
               </Link>
             </li>
-          </ul>
+          </ul> */}
           <ul className="flex flex-col gap-1 border-y-[0.5px] border-stroke p-2.5 dark:border-dark-3">
             <li>
               <Link
