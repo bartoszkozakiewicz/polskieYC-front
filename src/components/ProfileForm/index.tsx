@@ -4,6 +4,9 @@ import React, { useState } from "react";
 import CustomInput from "../FormElements/InputGroup/CustomInput";
 import CustomTextArea from "../FormElements/InputGroup/CustomTextArea";
 import { useRouter } from "next/navigation";
+import { fetchWithInterceptors } from "@/utils/fetch/fetchInterceptor";
+import { useAuth } from "@/contexts/AuthContext";
+import { getIdToken } from "firebase/auth";
 
 interface UserForm {
   name: string;
@@ -16,7 +19,10 @@ interface UserForm {
 }
 
 const ProfileForm = () => {
+  const { user } = useAuth();
   const router = useRouter();
+
+  // -- USE STATES --
   const [userForm, setUserForm] = useState<UserForm>({
     name: "a",
     surname: "",
@@ -31,15 +37,23 @@ const ProfileForm = () => {
 
   const handleSaveUserForm = async () => {
     console.log("User in regiresterUserInDb", userForm);
-    const response = await fetch("/api/user_form", {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userForm),
-    });
-    console.log("Res: ", response);
-    router.push("/settings");
+
+    if (user) {
+      const tokenId = await getIdToken(user);
+
+      fetchWithInterceptors(
+        process.env.NEXT_PUBLIC_URL + "user_form",
+        tokenId,
+        "PATCH",
+        { userForm: userForm, userId: user.uid },
+      )
+        .then((data: any) => {
+          router.push("/settings");
+        })
+        .catch((error: any) => {
+          console.error(error);
+        });
+    }
   };
 
   const updateForm = (key: string, val: string) => {

@@ -10,7 +10,7 @@ datasource db {
 }
 
 model User {
-  id              Int        @id @default(autoincrement())
+  id              Int       @id @default(autoincrement())
   name            String?
   surname         String?
   linkedin        String?
@@ -18,24 +18,12 @@ model User {
   introduction    String?
   accomplishments String?
   education       String?
-  email           String     @unique
-  hasAccess       Boolean    @default(false)
-  credentials     Int        @default(0)
+  email           String    @unique
+  hasAccess       Boolean   @default(false)
+  credentials     Int       @default(0)
   createdAt       DateTime?
   lastLogin       DateTime?
-  localId         String?    @unique
-  customerId      String?    @unique
+  localId         String?   @unique
+  customerId      String?   @unique
   priceId         String?
-  documents       Document[]
-}
-
-model Document {
-  id        Int       @id @default(autoincrement())
-  title     String
-  path      String    @unique
-  type      String
-  createdAt DateTime?
-  updatedAt DateTime?
-  userId    String
-  User      User      @relation(fields: [userId], references: [localId])
 }

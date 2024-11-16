@@ -16,7 +16,7 @@ const CustomTextArea = ({
   placeholder,
 }: Props) => {
   return (
-    <div>
+    <div className="w-[100%]">
       <label
         className="mb-1 block text-body-sm font-medium text-dark dark:text-white"
         htmlFor="phoneNumber"

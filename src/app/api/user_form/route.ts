@@ -6,9 +6,12 @@ const prisma = new PrismaClient();
 
 export async function PATCH(request: NextRequest) {
     try {
-        const { id, email, hasAccess } = await request.json();
+        const { userId, userForm} = await request.json();
 
-        if (!id) {
+        console.log("User Id: ", userId)
+        console.log("User form:  ", userForm)
+
+        if (!userId) {
             return NextResponse.json(
                 { error: "User ID is required for update" },
                 { status: 400 }
@@ -16,12 +19,12 @@ export async function PATCH(request: NextRequest) {
         }
 
         const updatedUser = await prisma.user.update({
-            where: { id: Number(id) },
-            data: { email, hasAccess }
+            where: { localId: userId},
+            data: { ...userForm}
         });
 
         return NextResponse.json(
-            { msg: `User with ID ${id} updated successfully`, updatedUser }
+            { msg: `User updated successfully`, updatedUser }
         );
     } catch (e) {
         console.error(e);
