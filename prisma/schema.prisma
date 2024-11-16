@@ -1,0 +1,56 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["debian-openssl-1.1.x", "linux-musl-openssl-3.0.x"]
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id          Int          @id @default(autoincrement())
+  name        String?
+  email       String       @unique
+  hasAccess   Boolean      @default(false)
+  credentials Int          @default(0)
+  createdAt   DateTime?
+  lastLogin   DateTime?
+  localId     String?      @unique
+  customerId  String?      @unique
+  priceId     String?
+  documents   Document[]
+  suggestions Suggestion[]
+  votes       Vote[]
+}
+
+model Document {
+  id        Int       @id @default(autoincrement())
+  title     String
+  path      String    @unique
+  type      String
+  createdAt DateTime?
+  updatedAt DateTime?
+  userId    String
+  User      User      @relation(fields: [userId], references: [localId])
+}
+
+model Suggestion {
+  id           Int    @id @default(autoincrement())
+  authorId     String
+  title        String
+  description  String
+  vote_counter Int    @default(0)
+  User         User   @relation(fields: [authorId], references: [localId])
+  votes        Vote[]
+}
+
+model Vote {
+  id           Int        @id @default(autoincrement())
+  userId       String
+  suggestionId Int
+  hasVoted     Boolean    @default(false)
+  User         User       @relation(fields: [userId], references: [localId])
+  Suggestion   Suggestion @relation(fields: [suggestionId], references: [id])
+}
