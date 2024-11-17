@@ -55,11 +55,14 @@ const Header = (props: {
           {/* <!-- Hamburger Toggle BTN --> */}
 
           <Link className="block flex-shrink-0 lg:hidden" href="/">
-            <Image
-              width={32}
-              height={32}
-              src={"/images/logo/logo-icon.svg"}
+                   <Image
+              width={120}
+              height={22}
+              src={"/images/logo/nerdnet_logo2.png"}
               alt="Logo"
+              priority
+              className="dark:hidden"
+              style={{ width: "auto", height: "auto" }}
             />
           </Link>
         </div>
