@@ -32,7 +32,7 @@ const SearchForm = () => {
         { reqs: reqs, type: searchType, userId: user.uid },
       )
         .then((data: any) => {
-          router.push("/settings");
+          // router.push("/settings");
         })
         .catch((error: any) => {
           console.error(error);
