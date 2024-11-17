@@ -24,7 +24,7 @@ const ProfileForm = () => {
 
   // -- USE STATES --
   const [userForm, setUserForm] = useState<UserForm>({
-    name: "a",
+    name: "",
     surname: "",
     linkedin: "",
     scholar: "",
@@ -104,7 +104,7 @@ const ProfileForm = () => {
             val={userForm.introduction}
             key_={"introduction"}
             valSetter={updateForm}
-            label={"Introduce yourrself"}
+            label={"Introduce yourself"}
             placeholder="Write about your background and what are you are looking for. Cover your professional accomplishments and interests."
           />
           <CustomTextArea
