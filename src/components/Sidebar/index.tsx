@@ -104,7 +104,7 @@ const menuGroups = [
           </svg>
         ),
         label: "Businesses for you",
-        route: "/data",
+        route: "/bussiness_projects",
       },
       {
         icon: (
@@ -134,7 +134,7 @@ const menuGroups = [
           </svg>
         ),
         label: "Trending Ideas for you",
-        route: "/data",
+        route: "/trending_projects",
       },
       // {
       //   icon: (
