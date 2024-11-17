@@ -15,6 +15,7 @@ const searchBusinessResults = async (req: NextRequest) => {
     "POST",
   );
   console.log("res: ", response);
+  return NextResponse.json({ data: response });
 };
 
 export const POST = authMiddleware(searchBusinessResults);
