@@ -118,7 +118,7 @@ const BussinessProjects = () => {
       )
         .then((data: any) => {
           console.log(data);
-          // setProjects(data);
+          setProjects(data.data.results);
           setIsLoading(false);
         })
         .catch((error: any) => console.error(error));
