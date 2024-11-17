@@ -184,11 +184,20 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
         {/* <!-- SIDEBAR HEADER --> */}
         <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5 xl:py-10">
           <Link href="/">
-            <p className="text-2xl font-bold">NerdNet</p>
+            {/* <p className="text-2xl font-bold">NerdNet</p> */}
+            <Image
+              width={160}
+              height={28}
+              src={"/images/logo/nerdnet_logo2.png"}
+              alt="Logo"
+              priority
+              className="dark:hidden"
+              style={{ width: "auto", height: "auto" }}
+            />
             {/* <Image
               width={176}
               height={32}
-              src={"/images/logo/logo-dark.svg"}
+              src={"/images/logo/nerdnet_logo2.png"}
               alt="Logo"
               priority
               className="dark:hidden"

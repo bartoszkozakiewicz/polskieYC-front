@@ -151,7 +151,7 @@ const SettingBoxes = () => {
 
             <button
               onClick={() => handleSaveUserForm()}
-              className=" h-[40px] rounded-md bg-[#5750F1] text-xl font-bold text-white "
+              className=" h-[40px] rounded-md bg-primary text-xl font-bold text-white "
             >
               Save
             </button>

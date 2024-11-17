@@ -6,7 +6,7 @@ import { queryFastApiEndpoint } from "@/utils/fetch/fetchFastApi";
 const searchCustomResults = async (req: NextRequest) => {
   const data = await req.json();
   console.log("Data: ", data);
-  const response = await queryFastApiEndpoint("test");
+  const response = await queryFastApiEndpoint("search", data, {}, "POST");
   console.log("res: ", response);
 };
 

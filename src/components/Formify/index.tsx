@@ -131,7 +131,7 @@ const Formify = () => {
                 <Step color="#5750F1" key={label} completed={completed[index]}>
                   <StepButton
                     disabled
-                    color="#5750F1"
+                    color="primary"
                     onClick={handleStep(index)}
                   >
                     {label}

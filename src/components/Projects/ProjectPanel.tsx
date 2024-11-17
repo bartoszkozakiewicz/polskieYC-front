@@ -17,7 +17,9 @@ const ProjectPanel = ({ project }: any) => {
       {project?.company && (
         <p className="mb-4 text-sm font-medium text-gray-700">
           <strong>Company:</strong>{" "}
-          <span className="font-semibold text-blue-600">{project.company}</span>
+          <span className="font-semibold text-[#1DBB3A]">
+            {project.company}
+          </span>
         </p>
       )}
       <div className="text-sm font-medium text-gray-700">
