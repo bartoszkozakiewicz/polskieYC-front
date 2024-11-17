@@ -5,7 +5,7 @@ import SearchForm from "@/components/SearchForm";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "NerdNed - connect for innovations",
+  title: "NerdNet - connect for innovations",
   description:
     "This is NerdNet - marketplace for researchers, bussinesses and investors",
 };
