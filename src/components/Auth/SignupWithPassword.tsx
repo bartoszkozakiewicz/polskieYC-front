@@ -2,10 +2,12 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/navigation";
+import { useSnackbar } from "notistack";
 
 export default function SignupWithPassword() {
   const { user, signUpWithEmail, loading, authLoading } = useAuth();
   const router = useRouter();
+  const { enqueueSnackbar } = useSnackbar();
 
   const [data, setData] = useState({
     name: "",
@@ -17,7 +19,11 @@ export default function SignupWithPassword() {
   // ---- firebase auth ----
   const handleSignUp = async () => {
     console.log("start signing up");
-    signUpWithEmail(data.email, data.password, data.name);
+    try {
+      await signUpWithEmail(data.email, data.password, data.name);
+    } catch (e: any) {
+      enqueueSnackbar(e.message, { variant: "error" });
+    }
   };
 
   useEffect(() => {
@@ -25,8 +31,6 @@ export default function SignupWithPassword() {
       router.push("/profile_form");
     }
   }, [user]);
-
-  console.log("data", data);
 
   return (
     <div>
@@ -108,7 +112,7 @@ export default function SignupWithPassword() {
         </div>
       </div>
 
-      <div className="mb-5">
+      <div className="mb-10">
         <label
           htmlFor="password"
           className="mb-2.5 block font-medium text-dark dark:text-white"
@@ -120,6 +124,12 @@ export default function SignupWithPassword() {
             onChange={(e) =>
               setData({ ...data, [e.target.name]: e.target.value })
             }
+            style={{
+              backgroundColor: "transparent",
+              boxShadow: "0 0 0 100px transparent inset",
+              border: "1px solid #ccc",
+              color: "inherit",
+            }}
             value={data.password}
             type="password"
             name="password"
@@ -154,7 +164,7 @@ export default function SignupWithPassword() {
         </div>
       </div>
 
-      <div className="mb-6 flex items-center justify-between gap-2 py-2">
+      {/* <div className="mb-6 flex items-center justify-between gap-2 py-2">
         <label
           htmlFor="remember"
           className="flex cursor-pointer select-none items-center font-satoshi text-base font-medium text-dark dark:text-white"
@@ -163,7 +173,6 @@ export default function SignupWithPassword() {
             type="checkbox"
             name="remember"
             id="remember"
-            className="peer sr-only"
           />
           <span
             className={`mr-2.5 inline-flex h-5.5 w-5.5 items-center justify-center rounded-md border border-stroke bg-white text-white text-opacity-0 peer-checked:border-primary peer-checked:bg-primary peer-checked:text-opacity-100 dark:border-stroke-dark dark:bg-white/5 ${
@@ -187,7 +196,7 @@ export default function SignupWithPassword() {
           </span>
           Remember me
         </label>
-      </div>
+      </div> */}
 
       <div className="mb-4.5">
         <button

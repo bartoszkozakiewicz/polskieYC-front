@@ -15,6 +15,13 @@ const DropdownUser = () => {
   const { user, userDetails, logout } = useAuth();
   const { credits } = useCredits();
 
+  useEffect(() => {
+    console.log("Verify user: ", user);
+    if (!user) {
+      router.push("/auth/signin");
+    }
+  }, [user, router]);
+
   return (
     <ClickOutside onClick={() => setDropdownOpen(false)} className="relative">
       <Link

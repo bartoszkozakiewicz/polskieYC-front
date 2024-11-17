@@ -34,7 +34,7 @@ const menuGroups = [
           </svg>
         ),
         label: "Search",
-        route: "/search",
+        route: "/",
       },
       // {
       //   icon: (

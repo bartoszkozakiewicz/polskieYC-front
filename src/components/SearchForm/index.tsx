@@ -6,7 +6,6 @@ import CustomCheckbox from "../FormElements/Checkboxes/CustomCheckbox";
 import { fetchWithInterceptors } from "@/utils/fetch/fetchInterceptor";
 import { useAuth } from "@/contexts/AuthContext";
 import { getIdToken } from "firebase/auth";
-import { useRouter } from "next/navigation";
 import {
   Dialog,
   DialogActions,
@@ -91,7 +90,6 @@ const test_data = [
 
 const SearchForm = () => {
   const { user } = useAuth();
-  const router = useRouter();
 
   // -- USE STATES --
   const [searchType, setSearchType] = useState<string>("");
@@ -109,6 +107,7 @@ const SearchForm = () => {
       const tokenId = await getIdToken(user);
       setIsLoading(true);
       setOpen(true);
+      setIsLoading(false);
 
       fetchWithInterceptors(
         process.env.NEXT_PUBLIC_URL + "custom_search",
@@ -117,11 +116,11 @@ const SearchForm = () => {
         { reqs: reqs, type: searchType, userId: user.uid },
       )
         .then((data: any) => {
-          // router.push("/settings");
           setIsLoading(false);
         })
         .catch((error: any) => {
           console.error(error);
+          setIsLoading(false);
         });
     }
   };

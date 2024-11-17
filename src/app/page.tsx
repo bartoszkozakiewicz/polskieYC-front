@@ -1,9 +1,8 @@
-import React from "react";
-
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
-import { Metadata } from "next";
 import DefaultLayout from "@/components/Layouts/DefaultLaout";
-import Formify from "@/components/Formify";
+import React from "react";
+import SearchForm from "@/components/SearchForm";
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "NerdNed - connect for innovations",
@@ -14,7 +13,10 @@ export const metadata: Metadata = {
 const page = () => {
   return (
     <DefaultLayout>
-      <Formify />
+      <Breadcrumb pageName="Search" />
+      <div className="flex flex-col gap-10">
+        <SearchForm />
+      </div>
     </DefaultLayout>
   );
 };

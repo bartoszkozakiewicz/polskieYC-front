@@ -106,6 +106,7 @@ export const AuthProvider = ({ children }: any) => {
     name: string,
   ) => {
     setAuthLoading(true);
+    let error = "";
     try {
       const registeredUser = await createUserWithEmailAndPassword(
         auth,
@@ -120,7 +121,6 @@ export const AuthProvider = ({ children }: any) => {
         const user = {
           email: registeredUser.user.email,
           name: name,
-          hasAccess: false,
           createdAt: new Date(),
           localId: registeredUser.user.uid,
         };
@@ -128,8 +128,20 @@ export const AuthProvider = ({ children }: any) => {
         await registerUserInDb(user);
         console.log("User registered in db");
       }
-    } catch (error) {
-      console.error("Error during email sign up:", error);
+    } catch (error: any) {
+      console.log("Halo 2", error.message);
+      if (error.message.includes("invalid-email")) {
+        error = "Invalid email, must be in email format";
+      } else if (error.message.includes("auth/weak-password")) {
+        console.log("passerror");
+        error = "Invalid password, must be minimum 6 characters long";
+      } else if (error.message.includes("email-already-in-use")) {
+        error = "User with that email may exist";
+      } else {
+        error = "Something went wrong, potentially server error";
+      }
+
+      throw new Error(error);
     } finally {
       setAuthLoading(false);
     }
