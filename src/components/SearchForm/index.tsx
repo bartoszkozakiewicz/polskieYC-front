@@ -16,6 +16,7 @@ import {
 } from "@mui/material";
 import CustomLoader from "../common/CustomLoader";
 import ProjectPanel from "../Projects/ProjectPanel";
+import { useSnackbar } from "notistack";
 
 const test_data = [
   {
@@ -98,6 +99,7 @@ interface Project {
 
 const SearchForm = () => {
   const { user } = useAuth();
+  const { enqueueSnackbar } = useSnackbar();
 
   // -- USE STATES --
   const [searchType, setSearchType] = useState<string>("");
@@ -112,8 +114,24 @@ const SearchForm = () => {
   };
 
   const handleSearchResults = async () => {
+    console.log("Search");
     if (user) {
       const tokenId = await getIdToken(user);
+      console.log("Reqs: ", reqs);
+      if (reqs == "" || reqs.length < 10) {
+        enqueueSnackbar(
+          "You must write your requirements to search for relevant data",
+          { variant: "error" },
+        );
+        return;
+      }
+      if (searchType == "") {
+        enqueueSnackbar("You must specify search type to get relevant data", {
+          variant: "error",
+        });
+        return;
+      }
+
       setIsLoading(true);
       setOpen(true);
 
