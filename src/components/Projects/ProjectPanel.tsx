@@ -51,7 +51,7 @@ const ProjectPanel: React.FC<{ project: any }> = ({ project }) => {
         <div className="text-sm font-medium text-gray-700">
           <strong>Tags:</strong>
           <ul className="mt-2 flex flex-wrap gap-2">
-            {project.tags.map((tag) => (
+            {project.tags.map((tag:any) => (
               <li
                 key={tag}
                 className="rounded-full bg-gray-200 px-3 py-1 text-xs text-gray-800"
