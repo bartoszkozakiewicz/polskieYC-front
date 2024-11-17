@@ -97,6 +97,15 @@ interface Project {
   company?: string;
 }
 
+interface Researcher {
+  name: string;
+  email: string;
+  affiliation: string;
+  summary: string;
+  researchgate: string
+}
+
+
 const SearchForm = () => {
   const { user } = useAuth();
   const { enqueueSnackbar } = useSnackbar();
@@ -106,7 +115,7 @@ const SearchForm = () => {
   const [reqs, setReqs] = useState<string>("");
   const [open, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [projects, setProjects] = useState<Project[]>([]);
+  const [projects, setProjects] = useState<Project[] | Researcher[]>([]);
 
   // -- FUNCTIONS --
   const handleSetSearchType = (label: string) => {
