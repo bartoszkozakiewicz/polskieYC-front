@@ -143,7 +143,7 @@ const SearchForm = () => {
       )
         .then((data: any) => {
           console.log("Data from custom search: ", data);
-          // setProjects(data)
+          setProjects(data.data.results)
 
           setIsLoading(false);
         })
@@ -174,8 +174,8 @@ const SearchForm = () => {
             <div className="flex flex-col items-center justify-center gap-5 p-5">
               <div className="flex w-[100%] flex-row justify-around">
                 <CustomCheckbox
-                  label={"Venture Capital"}
-                  isChecked={searchType == "Venture Capital"}
+                  label={"Projects"}
+                  isChecked={searchType == "Projects"}
                   setSearchType={handleSetSearchType}
                 />
                 <CustomCheckbox
