@@ -17,8 +17,7 @@ const SidebarItem = ({ item, pageName, setPageName }: any) => {
               pointerEvents: item.label.toLowerCase() === "talk to assistant" ? "none" : "auto", 
             }}
           href={item.route}
-          disabled={item.label.toLowerCase() === "talk to assistant"}
-          onClick={item.label.toLowerCase() === "talk to assistant" ? console.log("") : handleClick}
+          onClick={handleClick}
           className={`${
             item.label.toLowerCase() === "talk to assistant"
               ? "cursor-not-allowed opacity-50 text-dark-4 dark:text-gray-5"
