@@ -68,7 +68,7 @@ const ProfileForm = () => {
   console.log("name: ", userForm.name);
 
   return (
-    <div className="m-auto w-[50%] p-4 text-center text-2xl font-semibold text-black">
+    <div className="m-auto w-[100%] sm:w-[50%] p-4 text-center text-2xl font-semibold text-black">
       <p className="mb-4">Fill form about you</p>
       <div className="col-span-5 text-base font-normal xl:col-span-3">
         <div className="flex flex-col gap-4 rounded-[10px] border border-stroke bg-white p-4 text-left shadow-1 dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
