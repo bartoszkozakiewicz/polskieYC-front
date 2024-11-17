@@ -7,7 +7,7 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "NerdNet - connect for innovations",
   description:
-    "This is NerdNet - marketplace for researchers, bussinesses and investors",
+    "This is NerdNet - marketplace for researchers, businesses and investors",
 };
 
 const page = () => {

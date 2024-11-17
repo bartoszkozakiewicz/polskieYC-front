@@ -9,11 +9,9 @@ import { getIdToken } from "firebase/auth";
 import { HiOutlineCash } from "react-icons/hi";
 
 const DropdownUser = () => {
-  const [loggedInUser, setLoggedInUser] = useState<any>(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const router = useRouter();
   const { user, userDetails, logout } = useAuth();
-  const { credits } = useCredits();
 
   useEffect(() => {
     console.log("Verify user: ", user);
@@ -21,7 +19,6 @@ const DropdownUser = () => {
       router.push("/auth/signin");
     }
   }, [user, router]);
-
   return (
     <ClickOutside onClick={() => setDropdownOpen(false)} className="relative">
       <Link

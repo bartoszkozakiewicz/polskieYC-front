@@ -88,6 +88,14 @@ const test_data = [
   },
 ];
 
+interface Project {
+  name: string;
+  description: string;
+  industry: string;
+  tags: string[];
+  company?: string;
+}
+
 const SearchForm = () => {
   const { user } = useAuth();
 
@@ -96,6 +104,7 @@ const SearchForm = () => {
   const [reqs, setReqs] = useState<string>("");
   const [open, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [projects, setProjects] = useState<Project[]>([]);
 
   // -- FUNCTIONS --
   const handleSetSearchType = (label: string) => {
@@ -107,7 +116,6 @@ const SearchForm = () => {
       const tokenId = await getIdToken(user);
       setIsLoading(true);
       setOpen(true);
-      setIsLoading(false);
 
       fetchWithInterceptors(
         process.env.NEXT_PUBLIC_URL + "custom_search",
@@ -116,11 +124,13 @@ const SearchForm = () => {
         { reqs: reqs, type: searchType, userId: user.uid },
       )
         .then((data: any) => {
+          console.log("Data from custom search: ", data);
+          // setProjects(data)
+
           setIsLoading(false);
         })
         .catch((error: any) => {
           console.error(error);
-          setIsLoading(false);
         });
     }
   };
@@ -132,8 +142,6 @@ const SearchForm = () => {
   const handleClose = () => {
     setOpen(false);
   };
-
-  console.log("Reqs: ", reqs);
 
   return (
     <div className="relative h-screen">
@@ -208,9 +216,11 @@ const SearchForm = () => {
               <CustomLoader />
             ) : (
               <div className="flex flex-row  flex-wrap  ">
-                {test_data.map((ele, index) => {
-                  return <ProjectPanel key={index} project={ele} />;
-                })}
+                {projects &&
+                  projects.length > 0 &&
+                  projects.map((ele, index) => {
+                    return <ProjectPanel key={index} project={ele} />;
+                  })}
               </div>
             )}
           </DialogContent>

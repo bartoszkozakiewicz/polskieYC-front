@@ -104,7 +104,7 @@ const menuGroups = [
           </svg>
         ),
         label: "Businesses for you",
-        route: "/bussiness_projects",
+        route: "/business_projects",
       },
       {
         icon: (

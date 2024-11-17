@@ -6,7 +6,7 @@ import BussinessProjects from "@/components/Projects/BusinessProjects";
 const page = () => {
   return (
     <DefaultLayout>
-      <Breadcrumb pageName=" Relevant Bussiness Projects" />
+      <Breadcrumb pageName=" Relevant Business Projects" />
       <div className="flex flex-col gap-10">
         {" "}
         <BussinessProjects />

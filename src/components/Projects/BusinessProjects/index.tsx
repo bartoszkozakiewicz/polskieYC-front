@@ -5,6 +5,7 @@ import ProjectPanel from "../ProjectPanel";
 import { fetchWithInterceptors } from "@/utils/fetch/fetchInterceptor";
 import { getIdToken } from "firebase/auth";
 import { useAuth } from "@/contexts/AuthContext";
+import CustomLoader from "@/components/common/CustomLoader";
 
 const test_data = [
   {
@@ -90,18 +91,28 @@ const BussinessProjects = () => {
 
   // USE STATES --
   const [projects, setProjects] = useState<Project[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   // -- FUNCTIONS --
   const handleGetBussinessProjects = async () => {
+    setIsLoading(true);
     if (user) {
-      const id = await getIdToken(user);
+      const tokenId = await getIdToken(user);
+      const user_data = await fetchWithInterceptors(
+        process.env.NEXT_PUBLIC_URL + "user" + `?id=${user.uid}`,
+        tokenId,
+      );
+
       fetchWithInterceptors(
-        process.env.NEXT_PUBLIC_URL + "suggestions" + `?id=${user.uid}`,
-        id,
+        process.env.NEXT_PUBLIC_URL + "fy_search",
+        tokenId,
+        "POST",
+        { user_data: user_data, type: "ceo" },
       )
         .then((data: any) => {
           console.log(data);
           // setProjects(data);
+          setIsLoading(false);
         })
         .catch((error: any) => console.error(error));
     }
@@ -110,14 +121,20 @@ const BussinessProjects = () => {
   // -- USE EFFECTS --
   useEffect(() => {
     handleGetBussinessProjects();
-    setProjects(test_data);
+    // setProjects(test_data);
   }, []);
 
   return (
     <div className="flex flex-row  flex-wrap  ">
-      {test_data.map((ele, index) => {
-        return <ProjectPanel key={index} project={ele} />;
-      })}
+      {isLoading ? (
+        <CustomLoader />
+      ) : (
+        projects &&
+        projects.length > 0 &&
+        projects.map((ele, index) => {
+          return <ProjectPanel key={index} project={ele} />;
+        })
+      )}
     </div>
   );
 };
