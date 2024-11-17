@@ -88,8 +88,8 @@ const SettingBoxes = () => {
   }, []);
 
   return (
-    <div className="flex flex-row gap-5">
-      <div className="w-[60%] text-center text-2xl font-semibold text-black">
+    <div className="flex  flex-col sm:flex-row gap-5">
+      <div className="w-[100%] sm:w-[60%] text-center text-2xl font-semibold text-black">
         <div className="col-span-5 text-base font-normal xl:col-span-3">
           <div className="flex flex-col gap-4 rounded-[10px] border border-stroke bg-white p-4 text-left shadow-1 dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
             <div className="border-b border-stroke px-7 pb-4 dark:border-dark-3">
@@ -159,7 +159,7 @@ const SettingBoxes = () => {
         </div>
       </div>
 
-      <div className="w-[40%] text-center text-2xl font-semibold text-black">
+      <div className="w-[100%] sm:w-[40%]  text-center text-2xl font-semibold text-black">
         <div className="col-span-5 text-base font-normal xl:col-span-3">
           <div className="flex flex-col gap-4 rounded-[10px] border border-stroke bg-white p-4 text-left shadow-1 dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
             <div className="border-b border-stroke px-7 pb-4 dark:border-dark-3">
