@@ -4,39 +4,7 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-async function getUserDocuments(request: NextRequest) {
-    try {
-        const id  =  request.nextUrl.searchParams.get('id')
-        console.log("ID", id);
 
-        if (!id) {
-            return NextResponse.json(
-                { error: "User ID is required" },
-                { status: 400 }
-            );
-        }
-
-        // Pobieranie pojedynczego użytkownika na podstawie ID
-        const documents = await prisma.document.findMany({
-            where: { userId: id }
-        });
-
-        if (documents) {
-            return NextResponse.json({"documents" : documents});
-        } else {
-            return NextResponse.json(
-                { error: "User not found" },
-                { status: 404 }
-            );
-        }
-    } catch (e) {
-        console.error(e);
-        return NextResponse.json(
-            { error: `Internal server error: ${e}` },
-            { status: 500 }
-        );
-    }
-};
 
 function genDocTransaction(id:string, operationCost:number){
     return prisma.$transaction(async (tx) =>{
@@ -46,21 +14,7 @@ function genDocTransaction(id:string, operationCost:number){
             data: { credentials: { decrement: operationCost } },
         });
 
-        // 1.2 Generate the document
 
-
-        // 1.3 If error happened, give credits back to user
-        // 1.4 Return the document
-        const document = await prisma.document.create({
-            data: {
-                title: "New Document",
-                path: "New Path",
-                type: "type",
-                createdAt: new Date(),
-                updatedAt: new Date(),
-                userId: "1"
-            }
-        });
     },{
         maxWait: 20000,
         timeout: 20000,
@@ -123,5 +77,4 @@ async function generateDocument(request:NextRequest){
     }
 }
 
-export const GET = authMiddleware(getUserDocuments);
 export const POST = authMiddleware(generateDocument);
