@@ -16,7 +16,9 @@ const CustomCheckbox = ({ label, isChecked, setSearchType }: Props) => {
         <div className="relative">
           <input
             checked={isChecked}
+            disabled={label=="Businesses"}
             type="checkbox"
+            style={{pointerEvents: label=="Businesses" ? "none" : "auto"}}
             id={checkboxId}
             className="sr-only"
             onChange={() => {

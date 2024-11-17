@@ -11,12 +11,25 @@ const SidebarItem = ({ item, pageName, setPageName }: any) => {
 
   return (
     <>
-      <li>
+      <li >
         <Link
+            style={{
+              pointerEvents: item.label.toLowerCase() === "talk to assistant" ? "none" : "auto", 
+            }}
           href={item.route}
-          onClick={handleClick}
-          className={`${pageName === item.label.toLowerCase() ? "bg-primary/[.07] text-primary dark:bg-white/10 dark:text-white" : "text-dark-4 hover:bg-gray-2 hover:text-dark dark:text-gray-5 dark:hover:bg-white/10 dark:hover:text-white"} group relative flex items-center gap-3 rounded-[7px] px-3.5 py-3 font-medium duration-300 ease-in-out`}
+          disabled={item.label.toLowerCase() === "talk to assistant"}
+          onClick={item.label.toLowerCase() === "talk to assistant" ? console.log("") : handleClick}
+          className={`${
+            item.label.toLowerCase() === "talk to assistant"
+              ? "cursor-not-allowed opacity-50 text-dark-4 dark:text-gray-5"
+              : `${
+                  pageName === item.label.toLowerCase()
+                    ? "bg-primary/[.07] text-primary dark:bg-white/10 dark:text-white"
+                    : "text-dark-4 hover:bg-gray-2 hover:text-dark dark:text-gray-5 dark:hover:bg-white/10 dark:hover:text-white"
+                }`
+          } group relative flex items-center gap-3 rounded-[7px] px-3.5 py-3 font-medium duration-300 ease-in-out`}
         >
+
           {item.icon}
           {item.label}
           {item.message && (
